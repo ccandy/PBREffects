@@ -34,9 +34,7 @@ float3 CalcuateSepc(DefaultSurface surface, DefaultLight light, float3 viewDir)
 	float shinness = surface.Shinness;
 
 	float pShinness = pow(phong, shinness);
-
 	float specStrength = surface.SpecStrength;
-	
 	float3 specColor = light.LightColor * pShinness * surface.SpecStrength;
 
 	return specColor;

@@ -4,7 +4,7 @@
 #include "DefaultSurface.hlsl"
 #include "DefaultLight.hlsl"
 #include "DefaultLighting.hlsl"
-
+#include "Assets/ShaderLibrary/Util/RPPacking.hlsl"
 CBUFFER_START(UnityPerMaterial)
 	float4 _MainTex_ST;
 	float4 _Color;
@@ -14,6 +14,25 @@ CBUFFER_END
 
 TEXTURE2D(_MainTex);
 SAMPLER(sampler_MainTex);
+
+TEXTURE2D(_NormalMap);
+
+float3 DecodeNormal(float4 sample, float scale) {
+#if defined(UNITY_NO_DXT5nm)
+	return UnpackNormalRGB(sample, scale);
+#else
+	return UnpackNormalmapRGorAG(sample, scale);
+#endif
+}
+
+float3 GetNormalTS(float2 baseUV) {
+	float4 map = SAMPLE_TEXTURE2D(_NormalMap, sampler_MainTex, baseUV);
+	//float scale = INPUT_PROP(_NormalScale);
+	float3 normal = DecodeNormal(map, 3);
+	return normal;
+}
+
+
 
 struct VertexInput
 {
@@ -55,7 +74,12 @@ VertexOutput VertProgram(VertexInput input)
 float4 FragProgram(VertexOutput input) : SV_Target
 {
 	float4 texCol = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
+	
+	
+	
 	float3 normal = input.normal;
+	//normal = GetNormalTS(input.uv);
+	normal = GetNormalTS(input.uv);
 
 	DefaultSurface surface = CreateRegularSurface(_Color, texCol, normal, _Shinness, _SpecStrength);
 	DefaultLight light = CreateDefaultLight(_MainLightColor.rgb, _MainLightPosition);
