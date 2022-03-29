@@ -14,6 +14,8 @@ float _SpecStrength;
 float _NormalScale;
 CBUFFER_END
 
+float _UseNormalMap;
+
 TEXTURE2D(_MainTex);
 SAMPLER(sampler_MainTex);
 
@@ -66,9 +68,14 @@ float4 FragProgram(VertexOutput input) : SV_Target
 	DefaultSurface surface = CreateRegularSurface(_Color, texCol, normal, _Shinness, _SpecStrength, _NormalScale);
 	DefaultLight light = CreateDefaultLight(_MainLightColor.rgb, _MainLightPosition);
 	//normal = GetNormalTS(input.uv);
-#if defined(_NORMAL_MAP)
-	surface.Normal = DecodeNormal(map, surface.NormalScale);
-#endif
+//#if defined(_NORMAL_MAP)
+//	surface.Normal = DecodeNormal(map, surface.NormalScale);
+//#endif
+
+	if (_UseNormalMap == 1) 
+	{
+		surface.Normal = DecodeNormal(map, surface.NormalScale);
+	}
 
 	float3 diffuseColor = CalcuateDiffuseColor(surface, light);
 

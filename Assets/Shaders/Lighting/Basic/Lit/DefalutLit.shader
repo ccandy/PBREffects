@@ -7,6 +7,7 @@ Shader "URPEffect/DefalutLit"
         _Shinness("Shiness", float) = 32
         _SpecStrength("Spec Strength", float) = 5
         [NoScaleOffset] _NormalMap("Normals", 2D) = "bump" {}
+        [Toggle] _UseNormalMap("Use normal map", Int) = 0
         _NormalScale("Normal Scale", float) = 1
     }
     SubShader
