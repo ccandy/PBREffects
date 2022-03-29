@@ -66,7 +66,7 @@ float4 FragProgram(VertexOutput input) : SV_Target
 	float3 spec = CalcuateSepc(surface, light, viewDir);
 
 	float4 finalCol = float4(diffuseColor + spec,1) *surface.BaseColor;
-	return finalCol;
+	return finalCol * PI;
 }
 
 #endif
