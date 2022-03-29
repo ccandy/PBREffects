@@ -1,16 +1,14 @@
-#ifndef UNLITCORE_INCLUDED
-#define UNLITCORE_INCLUDED
+#ifndef UNLITCUTOUT_INCLUDED
+#define UNLITCUTOUT_INCLUDED
 
 CBUFFER_START(UnityPerMaterial)
 	float4 _MainTex_ST;
 	float4 _Color;
+	float _Cutoff;
 CBUFFER_END
 
 TEXTURE2D(_MainTex);
 SAMPLER(sampler_MainTex);
-
-
-
 
 struct VertexInput
 {
@@ -39,9 +37,10 @@ VertexOutput VertProgram(VertexInput input)
 float4 FragProgram(VertexOutput input) : SV_Target
 {
 	float4 texCol = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
+	clip(texCol.a - _Cutoff);
 	float4 finalCol = texCol * _Color;
-
 	return finalCol;
 }
+
 
 #endif
