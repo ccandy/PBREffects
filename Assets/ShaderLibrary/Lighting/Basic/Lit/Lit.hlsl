@@ -3,7 +3,7 @@
 
 #include "DefaultSurface.hlsl"
 #include "DefaultLight.hlsl"
-#include "Lighting.hlsl"
+#include "DefaultLighting.hlsl"
 
 CBUFFER_START(UnityPerMaterial)
 	float4 _MainTex_ST;
@@ -20,6 +20,7 @@ struct VertexInput
 	float4 posOS : POSITION;
 	float2 uv : TEXCOORD0;
 	float3 normal:NORMAL;
+	
 
 	UNITY_VERTEX_INPUT_INSTANCE_ID
 };
@@ -29,6 +30,7 @@ struct VertexOutput
 	float2 uv : TEXCOORD0;
 	float4 posCS : SV_POSITION;
 	float3 normal:TEXCOORD1;
+	float3 posWS:TEXCOORD2;
 };
 
 VertexOutput VertProgram(VertexInput input)
@@ -41,6 +43,11 @@ VertexOutput VertProgram(VertexInput input)
 	float3 normal = TransformObjectToWorldNormal(input.normal);
 	normal = normalize(normal);
 	output.normal = normal;
+
+	float4x4 objectToWorld = GetObjectToWorldMatrix();
+	float4 posWS = mul(objectToWorld, input.posOS);
+	output.posWS = posWS.xyz;
+
 
 	return output;
 }
@@ -55,7 +62,10 @@ float4 FragProgram(VertexOutput input) : SV_Target
 
 	float3 diffuseColor = CalcuateDiffuseColor(surface, light);
 
-	float4 finalCol = float4(diffuseColor,1) *surface.BaseColor;
+	float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - input.posWS);
+	float3 spec = CalcuateSepc(surface, light, viewDir);
+
+	float4 finalCol = float4(diffuseColor + spec,1) *surface.BaseColor;
 	return finalCol;
 }
 
