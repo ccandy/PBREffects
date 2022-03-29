@@ -29,6 +29,7 @@ Shader "URPEffect/Unlit/Cutout"
             HLSLPROGRAM
             #pragma vertex VertProgram
             #pragma fragment FragProgram
+            #pragma multi_compile_instancing
             ENDHLSL
         }
     }
