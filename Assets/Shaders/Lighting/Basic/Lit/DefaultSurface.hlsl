@@ -5,11 +5,12 @@ struct DefaultSurface
 {
 	float4 BaseColor;
 	float3 Normal;
+	float NormalScale;
 	float Shinness;
 	float SpecStrength;
 };
 
-DefaultSurface CreateRegularSurface(float4 color, float4 texColor, float3 normal, float shinness, float specstrength)
+DefaultSurface CreateRegularSurface(float4 color, float4 texColor, float3 normal, float shinness, float specstrength, float normalscale)
 {
 	DefaultSurface surface;
 
@@ -17,7 +18,7 @@ DefaultSurface CreateRegularSurface(float4 color, float4 texColor, float3 normal
 	surface.Normal = normal;
 	surface.Shinness = shinness;
 	surface.SpecStrength = specstrength;
-
+	surface.NormalScale = normalscale;
 	return surface;
 }
 
