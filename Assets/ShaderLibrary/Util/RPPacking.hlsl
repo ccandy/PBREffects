@@ -9,13 +9,5 @@ float3 DecodeNormal(float4 map, float scale) {
 	return UnpackNormalmapRGorAG(map, scale);
 #endif
 }
-/*
-float3 GetNormalTS(float2 baseUV, float scale) {
-	float4 map = SAMPLE_TEXTURE2D(_NormalMap, sampler_MainTex, baseUV);
-	float3 normal = DecodeNormal(map, scale);
-	return normal;
-}*/
-
-
 
 #endif
