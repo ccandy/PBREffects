@@ -33,6 +33,7 @@ Shader "URPEffect/DefalutLit"
             HLSLPROGRAM
             #pragma vertex VertProgram
             #pragma fragment FragProgram
+            #pragma shader_feature _NORMAL_MAP
             #pragma multi_compile_instancing
             ENDHLSL
         }

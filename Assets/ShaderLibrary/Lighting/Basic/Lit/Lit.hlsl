@@ -62,12 +62,13 @@ float4 FragProgram(VertexOutput input) : SV_Target
 	float4 texCol = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
 	float4 map = SAMPLE_TEXTURE2D(_NormalMap, sampler_MainTex, input.uv);
 	float3 normal = input.normal;
-	//normal = GetNormalTS(input.uv);
-	
+
 	DefaultSurface surface = CreateRegularSurface(_Color, texCol, normal, _Shinness, _SpecStrength, _NormalScale);
 	DefaultLight light = CreateDefaultLight(_MainLightColor.rgb, _MainLightPosition);
+	//normal = GetNormalTS(input.uv);
+#if defined(_NORMAL_MAP)
 	surface.Normal = DecodeNormal(map, surface.NormalScale);
-
+#endif
 
 	float3 diffuseColor = CalcuateDiffuseColor(surface, light);
 
