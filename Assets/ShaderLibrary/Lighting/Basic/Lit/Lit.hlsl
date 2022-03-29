@@ -9,7 +9,7 @@ CBUFFER_START(UnityPerMaterial)
 	float4 _MainTex_ST;
 	float4 _Color;
 	float _Shinness;
-	float _SpecStrength
+	float _SpecStrength;
 CBUFFER_END
 
 TEXTURE2D(_MainTex);
@@ -51,9 +51,11 @@ float4 FragProgram(VertexOutput input) : SV_Target
 	float3 normal = input.normal;
 
 	DefaultSurface surface = CreateRegularSurface(_Color, texCol, normal, _Shinness, _SpecStrength);
+	DefaultLight light = CreateDefaultLight(_MainLightColor.rgb, _MainLightPosition);
 
-	
-	float4 finalCol = texCol * _Color;
+	float3 diffuseColor = CalcuateDiffuseColor(surface, light);
+
+	float4 finalCol = float4(diffuseColor,1) *surface.BaseColor;
 	return finalCol;
 }
 

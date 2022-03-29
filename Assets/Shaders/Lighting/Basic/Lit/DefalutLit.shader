@@ -1,4 +1,4 @@
-Shader "Unlit/DefalutLit"
+Shader "URPEffect/DefalutLit"
 {
     Properties
     {
@@ -16,12 +16,22 @@ Shader "Unlit/DefalutLit"
         }
         LOD 100
 
+        HLSLINCLUDE
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Assets/ShaderLibrary/Util/MathFunction.hlsl"
+            #include "Assets/ShaderLibrary/Lighting/Basic/Lit/Lit.hlsl"
+        ENDHLSL
         Pass
         {
-            HLSLINCLUDE
-                #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-                #include "Assets/ShaderLibrary/Util/MathFunction.hlsl"
-                #include "Assets/ShaderLibrary/Lighting/Basic/Lit/Lit.hlsl"
+
+            Tags
+            {
+                "LightMode" = "UniversalForward"
+            }
+            HLSLPROGRAM
+            #pragma vertex VertProgram
+            #pragma fragment FragProgram
+            #pragma multi_compile_instancing
             ENDHLSL
         }
     }
