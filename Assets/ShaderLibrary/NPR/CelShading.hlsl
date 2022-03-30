@@ -38,4 +38,18 @@ float3 CalcuateCelSpec(CelSurface surface, PBRLight light, float3 viewDir)
 	return specColor;
 }
 
+float3 CalcuateRimColor(CelSurface surface, PBRLight light, float3 viewDir) 
+{
+	float3 normal = surface.Normal;
+	float3 rimColor = surface.RimColor.rgb;
+	float3 lightColor = light.LightColor;
+
+	float f = 1 - Dot(normal, viewDir);
+
+	float3 finalCol = f * rimColor * lightColor;
+
+	return finalCol;
+
+}
+
 #endif

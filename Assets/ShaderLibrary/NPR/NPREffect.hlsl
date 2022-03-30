@@ -70,8 +70,10 @@ float4 FragProgram(VertexOutput input) : SV_Target
 	float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - input.posWS.xyz);
 	float3 diffuseColor = CalcuateCelDiffuse(surface, light);
 	float3 specColor = CalcuateCelSpec(surface, light, viewDir);
+	float3 rimColor = CalcuateRimColor(surface, light, viewDir);
+
 	clip(texCol.a - _Cutout);
-	float4 col = float4(diffuseColor + specColor,1) * surface.TexCol;
+	float4 col = float4(diffuseColor + specColor + rimColor,1) * surface.TexCol;
 	return col;
 }
 
