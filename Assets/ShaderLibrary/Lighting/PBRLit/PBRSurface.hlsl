@@ -19,11 +19,11 @@ PBRSurface CreateSurface(float4 baseColor, float4 texCol, float3 normal, float r
 	surface.Normal = normal;
 
 	surface.Roughness = roughness;
-	surface.Metallic = metalic;
+	surface.Metallic = metallic;
 
 	float3 baseF0 = float3(0.04, 0.04, 0.04);
-	float3 baseColor = surface.BaseColor.rgb;
-	surface.BaseF0 = lerp(baseF0, baseColor, metalic);
+	float3 col = surface.BaseColor.rgb;
+	surface.BaseF0 = lerp(baseF0, col, metallic);
 
 	return surface;
 }
