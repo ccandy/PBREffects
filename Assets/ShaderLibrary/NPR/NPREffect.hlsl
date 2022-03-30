@@ -62,8 +62,11 @@ float4 FragProgram(VertexOutput input) : SV_Target
 	float4 texCol = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
 	CelSurface surface = CreateCelSurface(_Color, texCol, input.normal,_ShadowColor.rgb, _ShadowSmooth, _Threshold);
 	PBRLight light = CreatePBRLight(_MainLightColor, _MainLightPosition);
-	
+
+	float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - input.posWS);
 	float3 diffuseColor = CalcuateCelDiffuse(surface, light);
+	
+	
 	float4 col = float4(diffuseColor,1) * surface.TexCol;
 	return col;
 }

@@ -19,6 +19,12 @@ float3 CalcuateCelDiffuse(CelSurface surface, PBRLight light)
 	float3 diffuseColor = diffuse * light.LightColor;
 
 	return diffuseColor;
+}
+
+float3 CalcuateCelSpec(CelSurface surface, PBRLight light, float3 viewDir) 
+{
+	float3 lightDir = light.LightDir;
+	float3 halfVector = normalize(lightDir + viewDir);
 
 }
 

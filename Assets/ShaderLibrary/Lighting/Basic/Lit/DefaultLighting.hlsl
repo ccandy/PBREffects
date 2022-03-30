@@ -25,6 +25,17 @@ float CaculatePhong(DefaultSurface surface, DefaultLight light, float3 viewDir)
 	return phong;
 }
 
+float CalculateBlinnPhong(DefaultSurface surface, DefaultLight light, float3 viewDir) 
+{
+	float3 normalDir = surface.Normal;
+	float3 lightDir = light.LightDirection;
+
+	float3 halfVector = normalize(viewDir + lightDir);
+	float blinnPhong = Dot(halfVector, normalDir);
+
+	return blinnPhong;
+}
+
 float3 CalcuateSepc(DefaultSurface surface, DefaultLight light, float3 viewDir)
 {
 	float3 normal = surface.Normal;
