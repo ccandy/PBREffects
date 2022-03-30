@@ -5,7 +5,10 @@ Shader "URPEffect/OutlineShader"
         _MainTex ("Texture", 2D) = "white" {}
         _Color("Color", Color) = (1,1,1,1)
         _OutlineColor("Outline Color", Color) = (1,1,1,1)
+        _ShadowColor("Shadow Color", Color) = (1,1,1,1)
+        _ShadowSmooth("Shadow Smooth", float) = 0.2
         _OutlineWidth("Outline Width", float) = 1
+        _Threshold("Threshold", float) = 0.5
     }
     SubShader
     {

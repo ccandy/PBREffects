@@ -1,13 +1,19 @@
 #ifndef NPREFFECT_INCLUDED
 #define NPREFFECT_INCLUDED
 
+#include "Assets/ShaderLibrary/NPR/NPRSurfaces.hlsl"
+#include "Assets/ShaderLibrary/Lighting/PBRLit/PBRLight.hlsl"
 #include "Assets/ShaderLibrary/NPR/Outline.hlsl"
-
+#include "CelShading.hlsl"
 CBUFFER_START(UnityPerMaterial)
 float4 _MainTex_ST;
 float4 _Color;
 float4 _OutlineColor;
+float4 _ShadowColor;
+float _ShadowSmooth;
 float _OutlineWidth;
+
+float _Threshold;
 
 CBUFFER_END
 
@@ -17,6 +23,7 @@ SAMPLER(sampler_MainTex);
 struct VertexInput
 {
 	float4 posOS : POSITION;
+	
 	float2 uv : TEXCOORD0;
 	float3 normal:NORMAL;
 
@@ -29,6 +36,7 @@ struct VertexOutput
 	float2 uv : TEXCOORD0;
 	float4 posCS : SV_POSITION;
 	float3 normal:TEXCOORD1;
+	float4 posWS:TEXCOORD2;
 };
 
 VertexOutput VertProgram(VertexInput input)
@@ -42,17 +50,26 @@ VertexOutput VertProgram(VertexInput input)
 	normal = normalize(normal);
 	output.normal = normal;
 
+	float4x4 objectToWorld = GetObjectToWorldMatrix();
+	float4 posWS = mul(objectToWorld, input.posOS);
+	output.posWS = posWS;
+
 	return output;
 }
 
 float4 FragProgram(VertexOutput input) : SV_Target
 {
 	float4 texCol = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
-	float4 finalCol = texCol * _Color;
-
-	return finalCol;
+	CelSurface surface = CreateCelSurface(_Color, texCol, input.normal,_ShadowColor.rgb, _ShadowSmooth, _Threshold);
+	PBRLight light = CreatePBRLight(_MainLightColor, _MainLightPosition);
+	
+	float3 diffuseColor = CalcuateCelDiffuse(surface, light);
+	float4 col = float4(diffuseColor,1) * surface.TexCol;
+	return col;
 }
 
+
+//outline
 VertexOutput VertOutlineProgram(VertexInput input)
 {
 	VertexOutput output;
