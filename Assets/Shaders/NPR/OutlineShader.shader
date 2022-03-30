@@ -6,12 +6,14 @@ Shader "URPEffect/OutlineShader"
         _Color("Color", Color) = (1,1,1,1)
         _OutlineColor("Outline Color", Color) = (1,1,1,1)
         _ShadowColor("Shadow Color", Color) = (1,1,1,1)
+        _RimColor("Rim Color", Color) = (1,1,1,1)
         _ShadowSmooth("Shadow Smooth", float) = 0.2
         _OutlineWidth("Outline Width", float) = 1
         _Threshold("Threshold", float) = 0.5
         _SpecStrength("Spec Strength", float) = 5
         _Shinness("Shinness", float) = 32
         _Cutout("Cut out", Range(0,1)) = 0.5
+        
     }
     SubShader
     {

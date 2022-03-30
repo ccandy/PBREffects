@@ -11,6 +11,7 @@ float4 _MainTex_ST;
 float4 _Color;
 float4 _OutlineColor;
 float4 _ShadowColor;
+float4 _RimColor;
 float _ShadowSmooth;
 float _OutlineWidth;
 float _Threshold;
@@ -63,7 +64,7 @@ VertexOutput VertProgram(VertexInput input)
 float4 FragProgram(VertexOutput input) : SV_Target
 {
 	float4 texCol = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
-	CelSurface surface = CreateCelSurface(_Color, texCol, input.normal,_ShadowColor.rgb, _ShadowSmooth, _Threshold, _SpecStrength, _Shinness);
+	CelSurface surface = CreateCelSurface(_Color, texCol, input.normal,_ShadowColor.rgb, _RimColor.rgb, _ShadowSmooth, _Threshold, _SpecStrength, _Shinness);
 	PBRLight light = CreatePBRLight(_MainLightColor, _MainLightPosition);
 
 	float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - input.posWS.xyz);
