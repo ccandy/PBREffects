@@ -1,6 +1,7 @@
 #ifndef NPREFFECT_INCLUDED
 #define NPREFFECT_INCLUDED
 
+#include "Assets/ShaderLibrary/Util/MathFunction.hlsl"
 #include "Assets/ShaderLibrary/NPR/NPRSurfaces.hlsl"
 #include "Assets/ShaderLibrary/Lighting/PBRLit/PBRLight.hlsl"
 #include "Assets/ShaderLibrary/NPR/Outline.hlsl"
@@ -12,9 +13,9 @@ float4 _OutlineColor;
 float4 _ShadowColor;
 float _ShadowSmooth;
 float _OutlineWidth;
-
 float _Threshold;
-
+float _SpecStrength;
+float _Shinness;
 CBUFFER_END
 
 TEXTURE2D(_MainTex);
@@ -60,14 +61,14 @@ VertexOutput VertProgram(VertexInput input)
 float4 FragProgram(VertexOutput input) : SV_Target
 {
 	float4 texCol = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
-	CelSurface surface = CreateCelSurface(_Color, texCol, input.normal,_ShadowColor.rgb, _ShadowSmooth, _Threshold);
+	CelSurface surface = CreateCelSurface(_Color, texCol, input.normal,_ShadowColor.rgb, _ShadowSmooth, _Threshold, _SpecStrength, _Shinness);
 	PBRLight light = CreatePBRLight(_MainLightColor, _MainLightPosition);
 
-	float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - input.posWS);
+	float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - input.posWS.xyz);
 	float3 diffuseColor = CalcuateCelDiffuse(surface, light);
+	float3 specColor = CalcuateCelSpec(surface, light, viewDir);
 	
-	
-	float4 col = float4(diffuseColor,1) * surface.TexCol;
+	float4 col = float4(diffuseColor + specColor,1) * surface.TexCol;
 	return col;
 }
 

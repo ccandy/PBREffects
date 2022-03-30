@@ -9,6 +9,8 @@ Shader "URPEffect/OutlineShader"
         _ShadowSmooth("Shadow Smooth", float) = 0.2
         _OutlineWidth("Outline Width", float) = 1
         _Threshold("Threshold", float) = 0.5
+        _SpecStrength("Spec Strength", float) = 5
+        _Shinness("Shinness", float) = 32
     }
     SubShader
     {

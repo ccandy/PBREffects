@@ -9,9 +9,14 @@ struct CelSurface
 	float3 ShadowColor;
 	float ShadowSmooth;
 	float Threshold;
+	float SpecStrength;
+	float Shinness;
+
+
 };
 
-CelSurface CreateCelSurface(float4 baseColor, float4 texCol, float3 normal, float3 scolor, float shadowsmooth, float threshold) 
+CelSurface CreateCelSurface(float4 baseColor, float4 texCol, float3 normal, float3 scolor, float shadowsmooth, float threshold,
+	float specstrength, float shinness) 
 {
 	CelSurface surface;
 
@@ -21,6 +26,9 @@ CelSurface CreateCelSurface(float4 baseColor, float4 texCol, float3 normal, floa
 	surface.ShadowColor = scolor;
 	surface.ShadowSmooth = shadowsmooth;
 	surface.Threshold = threshold;
+	surface.SpecStrength = specstrength;
+	surface.Shinness = shinness;
+
 
 	return surface;
 }
