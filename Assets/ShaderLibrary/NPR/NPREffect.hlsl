@@ -64,8 +64,8 @@ VertexOutput VertOutlineProgram(VertexInput input)
 	normal = normalize(normal);
 	output.normal = normal;
 
-	float2 extendDis = GetVertexExtend(normal, _OutlineWidth);
-	output.posCS.xy += extendDis*output.posCS.w;
+	float2 extendDis = GetVertexExtend(normal, _OutlineWidth, output.posCS.w);
+	output.posCS.xy += extendDis;
 
 	return output;
 }
