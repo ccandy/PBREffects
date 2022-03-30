@@ -8,7 +8,7 @@ float2 GetVertexExtend(float3 normalDir, float outlinewidth)
 
 	float3 normalCS = TransformWorldToHClipDir(normalDir);
 	float2 extendDis = normalize(normalCS.xy) * (outlinewidth * 0.01);
-	extendDis.x / scaleX;
+	extendDis.x /= scaleX;
 
 	return extendDis;
 }
