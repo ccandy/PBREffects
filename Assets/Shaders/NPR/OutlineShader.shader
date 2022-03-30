@@ -17,6 +17,7 @@ Shader "URPEffect/OutlineShader"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             #include "Assets/ShaderLibrary/NPR/NPREffect.hlsl"
+            //Assets\ShaderLibrary\NPR
         ENDHLSL
 
         Pass
