@@ -63,11 +63,11 @@ float4 FragProgram(VertexOutput input) : SV_Target
 	float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - input.posWS);
 	float3 halfVector = normalize(viewDir + light.LightDirection);
 
-	//float3 lightColor = CalculateLightColor(surface, light, halfVector, viewDir);
+	float3 lightColor = CalculateLightColor(surface, light, halfVector, viewDir);
 
-	//float4 finalCol = float4(lightColor, 1) * light.LightColor * PI;
+	float4 finalCol = float4(lightColor, 1) * float4(light.LightColor,1) * PI;
 
-	return 1;
+	return finalCol;
 }
 
 
