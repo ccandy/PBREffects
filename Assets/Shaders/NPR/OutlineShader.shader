@@ -11,6 +11,7 @@ Shader "URPEffect/OutlineShader"
         _Threshold("Threshold", float) = 0.5
         _SpecStrength("Spec Strength", float) = 5
         _Shinness("Shinness", float) = 32
+        _Cutout("Cut out", Range(0,1)) = 0.5
     }
     SubShader
     {
@@ -37,6 +38,7 @@ Shader "URPEffect/OutlineShader"
             ENDHLSL
         }
         //BackPass
+        
         Pass
         {
             Cull Front

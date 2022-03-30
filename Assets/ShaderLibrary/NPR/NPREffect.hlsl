@@ -18,6 +18,8 @@ float _SpecStrength;
 float _Shinness;
 CBUFFER_END
 
+float _Cutout;
+
 TEXTURE2D(_MainTex);
 SAMPLER(sampler_MainTex);
 
@@ -67,7 +69,7 @@ float4 FragProgram(VertexOutput input) : SV_Target
 	float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - input.posWS.xyz);
 	float3 diffuseColor = CalcuateCelDiffuse(surface, light);
 	float3 specColor = CalcuateCelSpec(surface, light, viewDir);
-	
+	clip(texCol.a - _Cutout);
 	float4 col = float4(diffuseColor + specColor,1) * surface.TexCol;
 	return col;
 }
@@ -93,6 +95,8 @@ VertexOutput VertOutlineProgram(VertexInput input)
 
 float4 FragOutlineProgram(VertexOutput input) : SV_Target
 {
+	float4 texCol = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
+	clip(texCol.a - _Cutout);
 	return _OutlineColor;
 }
 
