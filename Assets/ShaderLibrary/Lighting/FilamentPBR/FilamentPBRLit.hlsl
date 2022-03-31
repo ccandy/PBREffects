@@ -2,6 +2,8 @@
 #define FILAMENTPBRLIT_INCLUDED
 
 #include "Assets/ShaderLibrary/Util/MathFunction.hlsl"
+#include "Assets\ShaderLibrary\Lighting\FilamentPBR\FilamentSurface.hlsl"
+#include "Assets/ShaderLibrary/Lighting/PBRLit/PBRLight.hlsl"
 
 CBUFFER_START(UnityPerMaterial)
 float4 _MainTex_ST;
@@ -56,8 +58,14 @@ float4 FragProgram(VertexOutput input) : SV_Target
 {
 	float4 texCol = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
 	float3 normal = input.normal;
+	
+	FilamentSurface surface = CreateSurface(_Color, texCol, normal, _Emissive.rgb,
+		_Metallic, _Roughness, _Reflectance, _AmbientOcclusion);
+	PBRLight light = CreatePBRLight(_MainLightColor, _MainLightPosition);
 
-	return 1;
+	float4 finalCol = surface.BaseColor;
+
+	return finalCol;
 }
 
 
