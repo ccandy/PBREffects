@@ -1,5 +1,5 @@
-#ifndef NPRSURFACE_INCLUDED
-#define NPRSURFACE_INCLUDED
+#ifndef CELSURFACE_INCLUDED
+#define CELSURFACE_INCLUDED
 
 struct CelSurface 
 {

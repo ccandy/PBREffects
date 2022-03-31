@@ -1,6 +1,0 @@
-#ifndef TONGSHADING_INCLUDED
-#define TONGSHADING_INCLUDED
-
-
-
-#endif

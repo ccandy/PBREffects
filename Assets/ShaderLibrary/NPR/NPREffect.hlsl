@@ -2,10 +2,10 @@
 #define NPREFFECT_INCLUDED
 
 #include "Assets/ShaderLibrary/Util/MathFunction.hlsl"
-#include "Assets/ShaderLibrary/NPR/NPRSurfaces.hlsl"
+#include "Assets/ShaderLibrary/NPR/CelShading/CelSurface.hlsl"
 #include "Assets/ShaderLibrary/Lighting/PBRLit/PBRLight.hlsl"
-#include "Assets/ShaderLibrary/NPR/Outline.hlsl"
-#include "CelShading.hlsl"
+#include "Assets/ShaderLibrary/NPR/Outline/OutlineEffect.hlsl"
+#include "Assets/ShaderLibrary/NPR/CelShading/CelShading.hlsl"
 CBUFFER_START(UnityPerMaterial)
 float4 _MainTex_ST;
 float4 _Color;

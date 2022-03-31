@@ -9,9 +9,6 @@ struct ToneSurface
 
 	float BlueColor;
 	float YellowColor;
-
-
-
 };
 
 ToneSurface CreateSurface(float4 basecolor, float4 texcolor, float3 normal, float bluecolor, float yellowcolor) 
