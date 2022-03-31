@@ -2,8 +2,9 @@
 #define FILAMENTPBRLIT_INCLUDED
 
 #include "Assets/ShaderLibrary/Util/MathFunction.hlsl"
-#include "Assets\ShaderLibrary\Lighting\FilamentPBR\FilamentSurface.hlsl"
+#include "Assets/ShaderLibrary/Lighting/FilamentPBR/FilamentSurface.hlsl"
 #include "Assets/ShaderLibrary/Lighting/PBRLit/PBRLight.hlsl"
+#include "Assets/ShaderLibrary/Lighting/FilamentPBR/FilamentLighting.hlsl"
 
 CBUFFER_START(UnityPerMaterial)
 float4 _MainTex_ST;
