@@ -1,4 +1,4 @@
-Shader "URPEffect/OutlineShader"
+Shader "URPEffect/CelShadingShader"
 {
     Properties
     {
