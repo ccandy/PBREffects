@@ -67,16 +67,18 @@ float4 FragProgram(VertexOutput input) : SV_Target
 	DefaultSurface surface = CreateRegularSurface(_Color, texCol, normal, _Shinness, _SpecStrength, _NormalScale);
 	DefaultLight light = CreateDefaultLight(_MainLightColor.rgb, _MainLightPosition);
 	
-	if (_UseNormalMap == 1) 
+	/*if (_UseNormalMap == 1)
 	{
 		surface.Normal = DecodeNormal(map, surface.NormalScale);
-	}
+	}*/
 
 	float3 diffuseColor = CalcuateDiffuseColor(surface, light);
 	float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - input.posWS);
 	float3 spec = CalcuateSepc(surface, light, viewDir);
-	float4 finalCol = float4(diffuseColor + spec,1) *surface.BaseColor;
-	return finalCol * PI;
+	float4 finalCol = float4(diffuseColor + spec, 1);// *surface.BaseColor;
+	
+
+	return finalCol;
 }
 
 #endif

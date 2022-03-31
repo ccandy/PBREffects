@@ -12,7 +12,10 @@ float CalcuateDiffuse(DefaultSurface surface, DefaultLight light)
 float3 CalcuateDiffuseColor(DefaultSurface surface, DefaultLight light) 
 {
 	float diffuse = CalcuateDiffuse(surface, light);
-	return diffuse * light.LightColor;
+	float3 diffuseCol = diffuse * light.LightColor;
+	
+
+	return diffuseCol;
 }
 
 float CaculatePhong(DefaultSurface surface, DefaultLight light, float3 viewDir) 
@@ -21,7 +24,12 @@ float CaculatePhong(DefaultSurface surface, DefaultLight light, float3 viewDir)
 	float3 lightDir = light.LightDirection;
 
 	float3 refDir = reflect(-lightDir, normalDir);
-	float phong = Dot(refDir, viewDir);
+	float phong = DotMax(refDir, viewDir, 0.0001);
+
+	float edge = fwidth(phong);
+
+	float smoothPhong = smoothstep(-edge, edge, phong);
+
 	return phong;
 }
 
@@ -46,7 +54,7 @@ float3 CalcuateSepc(DefaultSurface surface, DefaultLight light, float3 viewDir)
 
 	float pShinness = pow(phong, shinness);
 	float specStrength = surface.SpecStrength;
-	float3 specColor = light.LightColor * pShinness * surface.SpecStrength;
+	float3 specColor = light.LightColor * pShinness *surface.SpecStrength;
 
 	return specColor;
 }
