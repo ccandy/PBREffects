@@ -1,5 +1,5 @@
-#ifndef NPREFFECT_INCLUDED
-#define NPREFFECT_INCLUDED
+#ifndef NPRCELEFFECT_INCLUDED
+#define NPRCELEFFECT_INCLUDED
 
 #include "Assets/ShaderLibrary/Util/MathFunction.hlsl"
 #include "Assets/ShaderLibrary/NPR/CelShading/CelSurface.hlsl"

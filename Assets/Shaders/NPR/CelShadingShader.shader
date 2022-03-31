@@ -27,7 +27,7 @@ Shader "URPEffect/CelShadingShader"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             
-            #include "Assets/ShaderLibrary/NPR/NPREffect.hlsl"
+            #include "Assets/ShaderLibrary/NPR/CelShading/NPRCelEffect.hlsl"
             //Assets\ShaderLibrary\NPR
         ENDHLSL
         //Front pass
