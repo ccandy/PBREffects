@@ -1,9 +1,6 @@
 #ifndef OUTLINEEFFECT_INCLUDED
 #define OUTLINEEFFECT_INCLUDED
 
-
-
-
 float2 GetVertexExtend(float3 normalDir, float outlinewidth, float w) 
 {
 	float4 scaleScreenParams = GetScaledScreenParams();

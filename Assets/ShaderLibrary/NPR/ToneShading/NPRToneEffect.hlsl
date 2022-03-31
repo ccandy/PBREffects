@@ -1,0 +1,7 @@
+#ifndef NPRTONEEFFECT_INCLUDED
+#define NPRTONEEFFECT_INCLUDED
+
+
+
+
+#endif
