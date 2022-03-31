@@ -9,6 +9,8 @@ Shader "URPEffect/ToneShadingShader"
         _BlueColor("Blue Color", Range(0,1)) = 0.5
         _YellowColor("Yellow Color", Range(0,1)) = 0.5
         _Cutout("Cut out", Range(0,1)) = 0.5
+        _Alpha("Alpha", Range(0,1)) = 0.5
+        _Beta("Beta", Range(0,1)) = 0.5
 
     }
     SubShader

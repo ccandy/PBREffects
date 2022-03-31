@@ -12,6 +12,10 @@ float4 _MainTex_ST;
 float4 _Color;
 float4 _OutlineColor;
 float _OutlineWidth;
+float _BlueColor;
+float _YellowColor;
+float _Alpha;
+float _Beta;
 CBUFFER_END
 
 float _Cutout;
