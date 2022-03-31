@@ -27,4 +27,21 @@ float3 CalcuateToneDiffuse(ToneSurface surface, PBRLight light)
 	return finalCol;
 }
 
+float3 CalcuateToneSpec(ToneSurface surface, PBRLight light, float3 viewDir)
+{
+	float3 normalDir = surface.Normal;
+	float3 lightDir = light.LightDirection;
+	float3 halfVector = normalize(viewDir + lightDir);
+	float3 lightColor = light.LightColor;
+
+	float specStrength = surface.SpecStrength;
+	float shinness = surface.Shinness;
+
+	float blinnPhong = Dot(halfVector, normalDir);
+
+	float3 finalCol = pow(blinnPhong, shinness) * specStrength * lightColor;
+
+	return finalCol;
+}
+
 #endif

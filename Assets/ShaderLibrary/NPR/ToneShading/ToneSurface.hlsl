@@ -12,9 +12,14 @@ struct ToneSurface
 
 	float Alpha;
 	float Beta;
+
+	float SpecStrength;
+	float Shinness;
 };
 
-ToneSurface CreateSurface(float4 basecolor, float4 texcolor, float3 normal, float bluecolor, float yellowcolor, float alpha, float beta) 
+ToneSurface CreateSurface(float4 basecolor, float4 texcolor, float3 normal, 
+	float bluecolor, float yellowcolor, float alpha, float beta,
+	float specstrength, float shinness) 
 {
 	ToneSurface surface;
 
@@ -25,7 +30,8 @@ ToneSurface CreateSurface(float4 basecolor, float4 texcolor, float3 normal, floa
 	surface.YellowColor = yellowcolor;
 	surface.Alpha = alpha;
 	surface.Beta = beta;
-
+	surface.SpecStrength = specstrength;
+	surface.Shinness = shinness;
 	return surface;
 }
 

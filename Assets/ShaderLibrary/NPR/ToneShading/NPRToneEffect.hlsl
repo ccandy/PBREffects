@@ -16,6 +16,8 @@ float _BlueColor;
 float _YellowColor;
 float _Alpha;
 float _Beta;
+float _SpecStrength;
+float _Shinness;
 CBUFFER_END
 
 float _Cutout;
@@ -63,7 +65,18 @@ VertexOutput VertProgram(VertexInput input)
 
 float4 FragProgram(VertexOutput input) : SV_Target
 {
-	return 1;
+	float4 texCol = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
+	ToneSurface surface = CreateSurface(_Color, texCol, input.normal,
+		_BlueColor, _YellowColor, _Alpha, _Beta,_SpecStrength, _Shinness);
+	PBRLight light = CreatePBRLight(_MainLightColor, _MainLightPosition);
+
+	float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - input.posWS.xyz);
+	float3 diffuseColor = CalcuateToneDiffuse(surface, light);
+	float3 specColor = CalcuateToneSpec(surface, light, viewDir);
+	
+	clip(texCol.a - _Cutout);
+	float4 col = float4(diffuseColor + specColor, 1)*surface.TexColor;
+	return col;
 }
 
 //outline
