@@ -18,12 +18,15 @@ Shader "URPEffect/PBRLit"
         HLSLINCLUDE
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-            #include "Assets/ShaderLibrary/Lighting/PBRLit/PBRLit.hlsl"
+            #include "Assets/ShaderLibrary/Lighting/FilamentPBR/FilamentPBRLit.hlsl"
         ENDHLSL
 
         Pass
         {
-            Tags { "LightMode" = "UniversalForward" }
+            Tags 
+            { 
+                "LightMode" = "UniversalForward" 
+            }
             HLSLPROGRAM
             #pragma vertex VertProgram
             #pragma fragment FragProgram
