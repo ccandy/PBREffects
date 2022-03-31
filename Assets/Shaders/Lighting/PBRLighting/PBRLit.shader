@@ -18,7 +18,8 @@ Shader "URPEffect/PBRLit"
         HLSLINCLUDE
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-            #include "Assets/ShaderLibrary/Lighting/FilamentPBR/FilamentPBRLit.hlsl"
+            #include "Assets/ShaderLibrary/Lighting/PBRLit/PBRLit.hlsl"
+            //Assets\ShaderLibrary\Lighting\PBRLit
         ENDHLSL
 
         Pass

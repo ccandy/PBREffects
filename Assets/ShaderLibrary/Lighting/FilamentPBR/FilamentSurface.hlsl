@@ -6,6 +6,7 @@ struct FilamentSurface
 {
 	float4 BaseColor;
 	
+	float3 Normal;
 	float3 Emissive;
 	
 	float Metallic;
@@ -15,12 +16,13 @@ struct FilamentSurface
 
 
 };
-FilamentSurface CreateSurface(float4 basecolor, float4 texcol, float3 emissive,
+FilamentSurface CreateSurface(float4 basecolor, float4 texcol, float3 normal, float3 emissive,
 	float metallic, float roughness, float reflectance, float ao) 
 {
 	FilamentSurface surface;
 
 	surface.BaseColor = basecolor * texcol;
+	surface.Normal = normal;
 	surface.Emissive = emissive;
 	surface.Metallic = metallic;
 	surface.Roughness = roughness;
