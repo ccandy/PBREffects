@@ -8,6 +8,7 @@ Shader "URPEffect/ToneShadingShader"
         _OutlineWidth("Outline Width", float) = 1
         _BlueColor("Blue Color", Range(0,1)) = 0.5
         _YellowColor("Yellow Color", Range(0,1)) = 0.5
+        _Cutout("Cut out", Range(0,1)) = 0.5
 
     }
     SubShader
@@ -21,7 +22,7 @@ Shader "URPEffect/ToneShadingShader"
         HLSLINCLUDE
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-            #include "Assets/ShaderLibrary/NPR/NPRCelEffect.hlsl"
+            #include "Assets/ShaderLibrary/NPR/ToneShading/NPRToneEffect.hlsl"
             //Assets\ShaderLibrary\NPR
         ENDHLSL
 
