@@ -34,5 +34,15 @@ Shader "URPEffect/ToneShadingShader"
             #pragma fragment FragProgram
             ENDHLSL
         }
+
+        Pass
+        {
+            Cull Front
+            Tags { "LightMode" = "SRPDefaultUnlit" }
+            HLSLPROGRAM
+            #pragma vertex VertOutlineProgram
+            #pragma fragment FragOutlineProgram
+            ENDHLSL
+        }
     }
 }

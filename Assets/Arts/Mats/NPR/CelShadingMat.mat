@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NPRMat
+  m_Name: CelShadingMat
   m_Shader: {fileID: 4800000, guid: 18b0e4bd837332d4490e30c31cf5b4ae, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
