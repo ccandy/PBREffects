@@ -64,6 +64,8 @@ float4 FragProgram(VertexOutput input) : SV_Target
 		_Metallic, _Roughness, _Reflectance, _AmbientOcclusion);
 	PBRLight light = CreatePBRLight(_MainLightColor, _MainLightPosition);
 
+	float3 diffuseColor = CalcuateDiffuseColor(surface, light);
+
 	float4 finalCol = surface.BaseColor;
 
 	return finalCol;

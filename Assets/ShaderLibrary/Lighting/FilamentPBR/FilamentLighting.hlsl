@@ -44,6 +44,11 @@ float SmithGGX(FilamentSurface surface, PBRLight light, float3 viewDir)
 	return sggx;
 }
 
+float FdLamert() 
+{
+	return 1.0 / PI;
+}
+
 float SmithGGXFast(FilamentSurface surface, PBRLight light, float3 viewDir) 
 {
 	float a = surface.Roughness;
@@ -58,8 +63,12 @@ float SmithGGXFast(FilamentSurface surface, PBRLight light, float3 viewDir)
 
 	float sggx = 0.5 / (GGXV + GGXL);
 
-	return sggx;
-	
+	return sggx;	
+}
+
+float3 CalcuateDiffuseColor(FilamentSurface surface, PBRLight light) 
+{
+	return 1;
 }
 
 #endif
